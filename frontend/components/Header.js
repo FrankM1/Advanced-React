@@ -1,6 +1,8 @@
 import Nav from "./Nav";
 import Link from "next/link";
 import styled from "styled-components";
+import Router from "next/router";
+import NProgress from "nprogress";
 
 const Logo = styled.h1`
     font-size: 4rem;
@@ -40,13 +42,26 @@ const StyledHeader = styled.header`
   }
 `;
 
+
+Router.onRouteChangeStart = () => {
+    NProgress.start();
+}
+
+Router.onRouteChangeComplete = () => {
+    NProgress.done();
+}
+
+Router.onRouteChangeError = () => {
+    NProgress.done();
+}
+
 const Header = () => {
     return (
         <StyledHeader>
             <div className="bar">
                 <Logo>
-                    <Link>
-                        <a href="">Sick Fits</a>
+                    <Link href="/">
+                        <a >Sick Fits</a>
                     </Link>
                 </Logo>
                 <Nav />
